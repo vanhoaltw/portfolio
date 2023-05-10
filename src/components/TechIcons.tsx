@@ -1,6 +1,5 @@
 import clsx from 'clsx';
 import * as React from 'react';
-import { IoLogoVercel } from 'react-icons/io5';
 import {
   SiFirebase,
   SiGit,
@@ -10,14 +9,13 @@ import {
   SiMongodb,
   SiNextdotjs,
   SiNodedotjs,
-  SiNotion,
-  SiPrettier,
   SiReact,
   SiRedux,
   SiSass,
-  SiSwift,
   SiTailwindcss,
+  SiThreedotjs,
   SiTypescript,
+  SiVite,
 } from 'react-icons/si';
 
 import Tooltip from '@/components/Tooltip';
@@ -85,10 +83,6 @@ const techList = {
     icon: SiMongodb,
     name: 'MongoDB',
   },
-  swr: {
-    icon: IoLogoVercel,
-    name: 'SWR',
-  },
   redux: {
     icon: SiRedux,
     name: 'Redux',
@@ -96,10 +90,6 @@ const techList = {
   mdx: {
     icon: SiMarkdown,
     name: 'MDX',
-  },
-  prettier: {
-    icon: SiPrettier,
-    name: 'Prettier',
   },
   analytics: {
     icon: SiGoogleanalytics,
@@ -109,12 +99,12 @@ const techList = {
     icon: SiGit,
     name: 'Git',
   },
-  notion: {
-    icon: SiNotion,
-    name: 'Notion API',
+  vite: {
+    icon: SiVite,
+    name: 'Vite.js',
   },
-  swift: {
-    icon: SiSwift,
-    name: 'Swift',
+  three: {
+    icon: SiThreedotjs,
+    name: 'Three.js',
   },
 };

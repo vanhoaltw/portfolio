@@ -40,7 +40,7 @@ export default function CloudinaryImg({
 
   const urlBlurred = buildUrl(publicId, {
     cloud: {
-      cloudName: 'theodorusclarence',
+      cloudName: 'audio-life',
     },
     transformations: {
       effect: {
@@ -54,7 +54,7 @@ export default function CloudinaryImg({
   });
   const url = buildUrl(publicId, {
     cloud: {
-      cloudName: 'theodorusclarence',
+      cloudName: 'audio-life',
     },
     transformations: {
       rawTransformation: aspect
@@ -69,10 +69,10 @@ export default function CloudinaryImg({
     <figure
       className={clsx(className, {
         'overflow-hidden rounded shadow dark:shadow-none': !noStyle,
-        'mx-auto w-full': mdx && width <= 800,
+        'mx-auto w-full': mdx && Number(width) <= 800,
       })}
       style={{
-        ...(mdx && width <= 800 ? { maxWidth: width } : {}),
+        ...(mdx && Number(width) <= 800 ? { maxWidth: width } : {}),
         ...style,
       }}
       {...rest}

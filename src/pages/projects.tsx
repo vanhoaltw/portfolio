@@ -23,7 +23,7 @@ export default function ProjectsPage({
         description="Showcase of my projects on front-end development that I'm proud of."
       />
 
-      <main>
+      <main className='min-h-screen'>
         <section className={clsx(isLoaded && 'fade-in-start')}>
           <div className='layout py-12'>
             <h1 className='text-3xl md:text-5xl' data-fade='0'>

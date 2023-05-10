@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { NextPage } from 'next';
 import { AppProps } from 'next/app';
 import Router from 'next/router';
 import { ThemeProvider } from 'next-themes';
@@ -6,37 +7,26 @@ import nProgress from 'nprogress';
 import * as React from 'react';
 import { SWRConfig } from 'swr';
 
-import 'react-lite-youtube-embed/dist/LiteYouTubeEmbed.css';
 import 'react-tippy/dist/tippy.css';
 import '@/styles/globals.css';
 import '@/styles/mdx.css';
 import '@/styles/dracula.css';
 import '@/styles/nprogress.css';
 
-import { getFromLocalStorage } from '@/lib/helper';
-
-import { blockDomainMeta } from '@/constants/env';
-
 Router.events.on('routeChangeStart', nProgress.start);
 Router.events.on('routeChangeError', nProgress.done);
 Router.events.on('routeChangeComplete', nProgress.done);
 
-function MyApp({ Component, pageProps }: AppProps) {
-  React.useEffect(() => {
-    // Don't increment views if not on main domain
-    if (
-      window.location.host !==
-        (process.env.NEXT_PUBLIC_BLOCK_DOMAIN_WHITELIST ||
-          'theodorusclarence.com') &&
-      blockDomainMeta
-    ) {
-      if (getFromLocalStorage('incrementMetaFlag') !== 'false') {
-        localStorage.setItem('incrementMetaFlag', 'false');
-        // reload page to make changes
-        window.location.reload();
-      }
-    }
-  }, []);
+export type NextPageWithLayout<P = null, IP = P> = NextPage<P, IP> & {
+  getLayout?: (page: React.ReactElement) => React.ReactNode;
+};
+
+type AppPropsWithLayout<P> = AppProps<P> & {
+  Component: NextPageWithLayout<P>;
+};
+
+function MyApp({ Component, pageProps }: AppPropsWithLayout<HTMLDivElement>) {
+  const getLayout = Component.getLayout ?? ((page) => page);
 
   return (
     <ThemeProvider attribute='class' defaultTheme='dark' enableSystem={false}>
@@ -45,7 +35,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           fetcher: (url) => axios.get(url).then((res) => res.data),
         }}
       >
-        <Component {...pageProps} />
+        {getLayout(<Component {...pageProps} />)}
       </SWRConfig>
     </ThemeProvider>
   );
