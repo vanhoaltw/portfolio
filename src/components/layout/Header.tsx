@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 import * as React from 'react';
 
@@ -44,6 +45,13 @@ export default function Header({ large = false }: HeaderProps) {
             large && 'lg:max-w-[68rem]'
           )}
         >
+          <UnstyledLink
+            href='/'
+            className='flex items-center gap-2 font-mono transition-all hover:opacity-60'
+          >
+            <Image src='/logo.svg' height={40} width={30} alt='' />
+            <span>HOA NGUYEN</span>
+          </UnstyledLink>
           <ul className='flex items-center justify-between space-x-3 text-xs md:space-x-4 md:text-base'>
             {links.map(({ href, label }) => (
               <li key={`${href}${label}`}>
@@ -81,6 +89,7 @@ const links = [
   { href: '/', label: 'Home' },
   // { href: '/blog', label: 'Blog' },
   { href: '/projects', label: 'Projects' },
+  { href: '/contact', label: 'Contact' },
   // { href: '/library', label: 'Library' },
   // { href: '/about', label: 'About' },
 ];
