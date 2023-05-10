@@ -1,3 +1,4 @@
+import { ContentMeta } from '@prisma/client';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 import { getViewsFromDevto } from '@/lib/devto';
@@ -21,18 +22,27 @@ export default async function handler(
       });
       const devto = await getViewsFromDevto();
 
-      const content = _content.map((meta) => {
-        const devtoViews = meta.slug.startsWith('b_')
-          ? devto?.find((i) => i.slug === meta.slug.replace('b_', ''))?.views
-          : undefined;
+      const content = _content.map(
+        (
+          meta: ContentMeta & {
+            _count: {
+              likes: number;
+              views: number;
+            };
+          }
+        ) => {
+          const devtoViews = meta.slug.startsWith('b_')
+            ? devto?.find((i) => i.slug === meta.slug.replace('b_', ''))?.views
+            : undefined;
 
-        return {
-          slug: meta.slug,
-          views: meta._count.views + (devtoViews ?? 0),
-          likes: meta._count.likes,
-          devtoViews,
-        };
-      });
+          return {
+            slug: meta.slug,
+            views: meta._count.views + (devtoViews ?? 0),
+            likes: meta._count.likes,
+            devtoViews,
+          };
+        }
+      );
 
       // Sort alphabetically
       content.sort((a, b) => a.slug.localeCompare(b.slug));
