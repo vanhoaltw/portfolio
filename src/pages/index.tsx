@@ -1,6 +1,7 @@
 import { extractPublicId } from 'cloudinary-build-url';
 import clsx from 'clsx';
 import * as React from 'react';
+import { ImFilePdf } from 'react-icons/im';
 import { InView } from 'react-intersection-observer';
 
 import useLoaded from '@/hooks/useLoaded';
@@ -13,8 +14,10 @@ import Skill from '@/components/homeSections/Skill';
 import CloudinaryImg from '@/components/images/CloudinaryImg';
 import { SocialLinks } from '@/components/layout/Footer';
 import Layout from '@/components/layout/Layout';
+import UnstyledLink from '@/components/links/UnstyledLink';
 import Seo from '@/components/Seo';
 import TechStack from '@/components/TechStack';
+import Tooltip from '@/components/Tooltip';
 
 import { personal_info } from '@/constants/common';
 
@@ -76,6 +79,28 @@ const IndexPage = () => {
               </h4>
               <figure className='mt-2' data-fade='6'>
                 <SocialLinks />
+              </figure>
+
+              <h4 className='mt-4' data-fade='4'>
+                Resume
+              </h4>
+              <figure className='mt-2' data-fade='6'>
+                <Tooltip
+                  trigger='mouseenter'
+                  hideOnClick={false}
+                  interactive
+                  html={
+                    <div className='inline-block rounded-md border bg-white p-2 text-gray-600 shadow-md dark:border-gray-600 dark:bg-dark dark:text-gray-200'>
+                      portfolio.pgf
+                    </div>
+                  }
+                >
+                  <UnstyledLink href='https://vietcv.io/vanhoaltw'>
+                    <button className='rounded-sm align-middle focus:outline-none focus-visible:ring focus-visible:ring-primary-300'>
+                      <ImFilePdf size={20} />
+                    </button>
+                  </UnstyledLink>
+                </Tooltip>
               </figure>
             </div>
           </div>
